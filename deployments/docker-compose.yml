@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  node-app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=123456
+      - DB_HOST=127.0.0.1
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_MAX_CONNECTIONS=20
+      - DB_IDLE_TIMEOUT=30000
+      - DB_CONNECTION_TIMEOUT=2000
+      - OMDB_URL=https://www.omdbapi.com
+      - API_KEY=2dcb1423
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    networks:
+      - goat-movie-network
+
+  db:
+    image: postgres:latest
+    container_name: my-postgres-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./migrations:/backup
+    networks:
+      - goat-movie-network
+
+
+networks:
+  goat-movie-network:
+    driver: bridge
+
+volumes:
+  pgdata:
