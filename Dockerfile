@@ -1,7 +1,10 @@
 FROM node:20.13.1-alpine
+
 WORKDIR /app
+
 COPY . .
-RUN npm i
+
+RUN npm install
 
 EXPOSE 8080
 
