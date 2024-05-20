@@ -1,29 +1,6 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  node-app:
-    build: ../
-    ports:
-      - "8080:8080"
-    environment:
-      - DB_USER=postgres
-      - DB_PASSWORD=123456
-      - DB_HOST=127.0.0.1
-      - DB_PORT=5432
-      - DB_DATABASE=postgres
-      - DB_MAX_CONNECTIONS=20
-      - DB_IDLE_TIMEOUT=30000
-      - DB_CONNECTION_TIMEOUT=2000
-      - OMDB_URL=https://www.omdbapi.com
-      - API_KEY=2dcb1423
-    depends_on:
-      - db
-      - redis
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    networks:
-      - goat-movie-network
 
   db:
     image: postgres:latest
@@ -40,12 +17,41 @@ services:
     networks:
       - goat-movie-network
 
-
   redis:
-    image: redis:latest
     container_name: my-redis
+    image: redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
-      - "6379:6379"
+      - 6379:6379
+    volumes:
+      - ../redis-config/:/tmp/redis.conf
+    networks:
+      - goat-movie-network
+
+  node-app:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - REDIS_URL=redis://0.0.0.0:6379
+      - DB_USER=postgres
+      - DB_PASSWORD=123456
+      - DB_HOST=127.0.0.1
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_MAX_CONNECTIONS=20
+      - DB_IDLE_TIMEOUT=30000
+      - DB_CONNECTION_TIMEOUT=2000
+      - OMDB_URL=https://www.omdbapi.com
+      - API_KEY=2dcb1423
+    depends_on:
+      - db
+      - redis
+    working_dir: /app
     networks:
       - goat-movie-network
 

@@ -4,7 +4,7 @@ const cashing = require('../DBs/redis/index');
 
 const isCashed = async (request, h) => {
 
-    const { cashType =  } = request.app;
+    const { cashType = "list" } = request.app;
 
     const { pathname, search} = request.url;
 
