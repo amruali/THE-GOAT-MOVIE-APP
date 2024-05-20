@@ -8,7 +8,7 @@ const { setupEndpoints } = require('./internals/transport/rest/endpoints')
 const init = async () => {
 
     const server = Hapi.server({
-        port: 8080,
+        port: 4000,
         host: '0.0.0.0'
     });
 
