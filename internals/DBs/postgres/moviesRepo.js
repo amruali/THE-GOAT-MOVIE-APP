@@ -84,8 +84,9 @@ module.exports = class {
                         "2023" 
                     from 
                         "goat-movies".movies 
-                    where ${whereClause}
-                        AND pos > $${nextQueryParameterIdx++}
+                    where 
+                        ${whereClause}
+                        ${ whereClause ? "AND" : ""} id > $${nextQueryParameterIdx++}
                         LIMIT $${nextQueryParameterIdx++}
                     `;
     
