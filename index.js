@@ -5,10 +5,13 @@ const Inert = require('@hapi/inert');
 
 const { setupEndpoints } = require('./internals/transport/rest/endpoints')
 
+
+require('dotenv').config()
+
 const init = async () => {
 
     const server = Hapi.server({
-        port: 4000,
+        port: process.env.PORT || 8080 ,
         host: '0.0.0.0'
     });
 
