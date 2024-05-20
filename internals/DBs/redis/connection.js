@@ -1,6 +1,9 @@
 const { createClient } = require('redis');
 
-const client = createClient();
+
+require('dotenv').config()
+
+const client = createClient({ url: process.env.REDIS_URL});
 
 client.connect();
 
