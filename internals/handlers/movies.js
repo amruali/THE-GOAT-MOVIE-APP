@@ -24,7 +24,7 @@ module.exports = class {
 
             const result = await moviesRepo.getMovies(request.query ?? {});
 
-            await cashing.saveList( pathname + search, result.movies.map( movie => JSON.stringify(movie)))
+            if (result.moviesCount && result.moviesCount > 0 ) await cashing.saveList( pathname + search, result.movies.map( movie => JSON.stringify(movie)))
 
             return result;
 
