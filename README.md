@@ -57,8 +57,16 @@ module.exports = pool;
 ```
 
 
-### Requests
+## Requests
 
+#### 1. List Movies (Pagination Supported!) 
+    => GET {{baseURL}}/api/v1/movies?page=2&pageSize=10
+
+#### 2. User Profile 
+    => GET {{baseURL}}/api/v1/user/profile/1
+
+#### 3. IMDB Movie By IMDB-ID
+    => GET {{baseURL}}/api/v1/movies/imdb/tt21276878
 
 
 
