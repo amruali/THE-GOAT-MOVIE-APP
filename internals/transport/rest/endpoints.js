@@ -1,3 +1,5 @@
+const Path = require('path')
+
 
 // handlers
 const MoviesHandlers = require('../../handlers/movies');
@@ -7,6 +9,17 @@ const UserHandlers = require('../../handlers/users');
 const { isCashed } = require('../../middlewares/middleware')
 
 const setupEndpoints = ( server ) => {
+
+
+    // Route to serve the Welcome Page
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: (request, h) => {
+            return h.file(Path.join(__dirname, '../../../public', 'index.html'));
+        }
+    });
+    
 
     server.route({
         method: 'GET',
