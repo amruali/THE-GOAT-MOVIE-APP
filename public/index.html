@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .welcome-container {
+            text-align: center;
+        }
+        .welcome-text {
+            font-size: 3em;
+            background: linear-gradient(90deg, #0000ff, #00ffff);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 2s infinite;
+        }
+        @keyframes shine {
+            0% {
+                background-position: 0%;
+            }
+            100% {
+                background-position: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1 class="welcome-text">!!THE-GOAT-MOVIE-APP!!</h1>
+    </div>
+</body>
+</html>
