@@ -7,6 +7,9 @@ deployments
 
 db
 
+
+redis-config
+
 # Ignore logs
 logs
 
